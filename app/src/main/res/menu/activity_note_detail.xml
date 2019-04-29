@@ -4,14 +4,14 @@
 
     <item android:id="@+id/action_save"
           app:showAsAction="always"
-          android:icon="@drawable/baseline_save_black_18dp"
+          android:icon="@drawable/twotone_save_black_24dp"
           android:title="Enregistrer">
 
     </item>
 
     <item android:id="@+id/action_delete"
           app:showAsAction="ifRoom"
-          android:icon="@drawable/baseline_delete_forever_black_18dp"
+          android:icon="@drawable/twotone_delete_forever_black_24dp"
           android:title="Supprimer">
 
     </item>

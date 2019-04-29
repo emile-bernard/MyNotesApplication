@@ -6,12 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Parcelable
 import android.support.design.widget.FloatingActionButton
-import android.support.v7.widget.LinearLayoutCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
-import android.util.Log
 import android.view.View
+import com.example.mynotesapplication.utils.loadNotes
+import com.example.mynotesapplication.utils.deleteNote
+import com.example.mynotesapplication.utils.persistNote
 
 class NoteListActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -28,7 +29,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         val floatingActionButton = findViewById(R.id.create_note_fab) as FloatingActionButton
         floatingActionButton.setOnClickListener(this)
 
-        notes = mutableListOf<Note>()
+        notes = loadNotes(this)
         adapter = NoteAdapter(notes, this)
 
         val recyclerView = findViewById(R.id.notes_recycler_view) as RecyclerView
@@ -62,6 +63,8 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     fun saveNote(note: Note, noteIndex: Int) {
+        persistNote(this, note)
+
         if(noteIndex < 0) {
             notes.add(0, note)
         } else {
@@ -75,6 +78,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
             return
         }
         val note = notes.removeAt(noteIndex)
+        deleteNote(this, note)
         adapter.notifyDataSetChanged()
     }
 

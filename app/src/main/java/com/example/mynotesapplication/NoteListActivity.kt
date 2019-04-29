@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Parcelable
 import android.support.design.widget.FloatingActionButton
 import android.support.v7.widget.LinearLayoutCompat
 import android.support.v7.widget.LinearLayoutManager
@@ -28,8 +29,6 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         floatingActionButton.setOnClickListener(this)
 
         notes = mutableListOf<Note>()
-        notes.add(Note("Note Test", "Bla bla bla"))
-
         adapter = NoteAdapter(notes, this)
 
         val recyclerView = findViewById(R.id.notes_recycler_view) as RecyclerView
@@ -103,7 +102,7 @@ class NoteListActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         val intent = Intent(this, NoteDetailActivity::class.java)
-        intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note)
+        intent.putExtra(NoteDetailActivity.EXTRA_NOTE, note as Parcelable)
         intent.putExtra(NoteDetailActivity.EXTRA_NOTE_INDEX, noteIndex)
         startActivityForResult(intent, NoteDetailActivity.REQUEST_EDIT_NOTE)
     }
